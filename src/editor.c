@@ -46,11 +46,6 @@ void editor_delete(Editor *e) {
   if (e->searching)
     return;
 
-  if (e->selection) {
-    printf("Delete in selection\n");
-    return;
-  }
-
   if (e->cursor >= e->data.count)
     return;
   memmove(&e->data.items[e->cursor], &e->data.items[e->cursor + 1],
