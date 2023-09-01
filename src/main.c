@@ -296,7 +296,7 @@ int main(int argc, char **argv) {
           } break;
 
           case SDLK_f: {
-            if (event.key.keysym.mod & KMOD_CTRL) {
+            if (event.key.keysym.mod & KMOD_GUI) {
               editor_start_search(&editor);
             }
           } break;
@@ -307,7 +307,7 @@ int main(int argc, char **argv) {
           } break;
 
           case SDLK_a: {
-            if (event.key.keysym.mod & KMOD_CTRL) {
+            if (event.key.keysym.mod & KMOD_GUI) {
               editor.selection = true;
               editor.select_begin = 0;
               editor.cursor = editor.data.count;
@@ -329,20 +329,20 @@ int main(int argc, char **argv) {
           } break;
 
           case SDLK_c: {
-            if (event.key.keysym.mod & KMOD_CTRL) {
+            if (event.key.keysym.mod & KMOD_GUI) {
               editor_clipboard_copy(&editor);
             }
           } break;
 
           case SDLK_v: {
-            if (event.key.keysym.mod & KMOD_CTRL) {
+            if (event.key.keysym.mod & KMOD_GUI) {
               editor_clipboard_paste(&editor);
             }
           } break;
 
           case SDLK_UP: {
             editor_update_selection(&editor, event.key.keysym.mod & KMOD_SHIFT);
-            if (event.key.keysym.mod & KMOD_CTRL) {
+            if (event.key.keysym.mod & KMOD_ALT) {
               editor_move_paragraph_up(&editor);
             } else {
               editor_move_line_up(&editor);
@@ -352,7 +352,7 @@ int main(int argc, char **argv) {
 
           case SDLK_DOWN: {
             editor_update_selection(&editor, event.key.keysym.mod & KMOD_SHIFT);
-            if (event.key.keysym.mod & KMOD_CTRL) {
+            if (event.key.keysym.mod & KMOD_ALT) {
               editor_move_paragraph_down(&editor);
             } else {
               editor_move_line_down(&editor);
@@ -372,7 +372,7 @@ int main(int argc, char **argv) {
 
           case SDLK_RIGHT: {
             editor_update_selection(&editor, event.key.keysym.mod & KMOD_SHIFT);
-            if (event.key.keysym.mod & KMOD_CTRL) {
+            if (event.key.keysym.mod & KMOD_ALT) {
               editor_move_word_right(&editor);
             } else {
               editor_move_char_right(&editor);
