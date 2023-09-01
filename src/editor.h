@@ -5,6 +5,7 @@
 #include "free_glyph.h"
 #include "lexer.h"
 #include "simple_renderer.h"
+#include <stdbool.h>
 #include <stdlib.h>
 
 #include <SDL2/SDL.h>
