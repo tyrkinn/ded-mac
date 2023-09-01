@@ -344,6 +344,8 @@ int main(int argc, char **argv) {
             editor_update_selection(&editor, event.key.keysym.mod & KMOD_SHIFT);
             if (event.key.keysym.mod & KMOD_ALT) {
               editor_move_paragraph_up(&editor);
+            } else if (event.key.keysym.mod & KMOD_GUI) {
+              editor_move_to_begin(&editor);
             } else {
               editor_move_line_up(&editor);
             }
@@ -354,6 +356,8 @@ int main(int argc, char **argv) {
             editor_update_selection(&editor, event.key.keysym.mod & KMOD_SHIFT);
             if (event.key.keysym.mod & KMOD_ALT) {
               editor_move_paragraph_down(&editor);
+            } else if (event.key.keysym.mod & KMOD_GUI) {
+              editor_move_to_end(&editor);
             } else {
               editor_move_line_down(&editor);
             }
@@ -364,6 +368,8 @@ int main(int argc, char **argv) {
             editor_update_selection(&editor, event.key.keysym.mod & KMOD_SHIFT);
             if (event.key.keysym.mod & KMOD_ALT) {
               editor_move_word_left(&editor);
+            } else if (event.key.keysym.mod & KMOD_GUI) {
+              editor_move_to_line_begin(&editor);
             } else {
               editor_move_char_left(&editor);
             }
@@ -374,6 +380,8 @@ int main(int argc, char **argv) {
             editor_update_selection(&editor, event.key.keysym.mod & KMOD_SHIFT);
             if (event.key.keysym.mod & KMOD_ALT) {
               editor_move_word_right(&editor);
+            } else if (event.key.keysym.mod & KMOD_GUI) {
+              editor_move_to_line_end(&editor);
             } else {
               editor_move_char_right(&editor);
             }
