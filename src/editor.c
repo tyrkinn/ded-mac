@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -18,6 +19,21 @@ void editor_backspace(Editor *e) {
     if (e->cursor == 0)
       return;
 
+    if (e->selection) {
+      size_t begin = e->select_begin;
+      size_t end = e->cursor;
+
+      if (begin > end)
+        SWAP(size_t, begin, end);
+
+      memmove(&e->data.items[begin], &e->data.items[end], e->data.count - end);
+      e->data.count -= end - begin;
+      e->cursor = begin;
+
+      editor_retokenize(e);
+      return;
+    }
+
     memmove(&e->data.items[e->cursor - 1], &e->data.items[e->cursor],
             e->data.count - e->cursor);
     e->cursor -= 1;
@@ -29,6 +45,11 @@ void editor_backspace(Editor *e) {
 void editor_delete(Editor *e) {
   if (e->searching)
     return;
+
+  if (e->selection) {
+    printf("Delete in selection\n");
+    return;
+  }
 
   if (e->cursor >= e->data.count)
     return;
