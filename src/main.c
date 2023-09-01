@@ -260,6 +260,21 @@ int main(int argc, char **argv) {
             editor.last_stroke = SDL_GetTicks();
           } break;
 
+          case SDLK_s: {
+            if (event.key.keysym.mod & KMOD_GUI) {
+              if (editor.file_path.count > 0) {
+                err = editor_save(&editor);
+                if (err != 0) {
+                  flash_error("Could not save currently edited file: %s",
+                              strerror(err));
+                }
+              } else {
+                // TODO: ask the user for the path to save to in this situation
+                flash_error("Nowhere to save the text");
+              }
+            }
+          } break;
+
           case SDLK_F2: {
             if (editor.file_path.count > 0) {
               err = editor_save(&editor);
