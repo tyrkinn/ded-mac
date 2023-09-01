@@ -30,6 +30,7 @@ void editor_backspace(Editor *e) {
       memmove(&e->data.items[begin], &e->data.items[end], e->data.count - end);
       e->data.count -= end - begin;
       e->cursor = begin;
+      e->selection = false;
 
       editor_retokenize(e);
       return;
